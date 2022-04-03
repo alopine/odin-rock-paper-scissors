@@ -5,47 +5,81 @@ function computerPlay() {
     // Return computer choice based on variable value
     switch (choice) {
         case 0:
-            return "rock";
+            return "ROCK";
         case 1:
-            return "paper";
+            return "PAPER";
         case 2:
-            return "scissors";
+            return "SCISSORS";
     }
 }
+
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-
-    if (playerSelection === "rock") {
-        if (computerSelection === "rock") {
-            return "Tie!";
-        } else if (computerSelection === "paper") {
-            return "You Lose! Paper beats Rock";
-        } else if (computerSelection === "scissors") {
-            return "You Win! Rock beats Scissors";
-        }
-    } else if (playerSelection === "paper") {
-        if (computerSelection === "rock") {
-            return "You Win! Paper beats Rock";
-        } else if (computerSelection === "paper") {
-            return "Tie!";
-        } else if (computerSelection === "scissors") {
-            return "You Lose! Scissors beat Paper";
-        }
-    } else if (playerSelection === "scissors") {
-        if (computerSelection === "rock") {
-            return "You Lose! Rock beats Scissors";
-        } else if (computerSelection === "paper") {
-            return "You Win! Scissors beat Paper";
-        } else if (computerSelection === "scissors") {
-            return "Tie!";
-        }
+    switch (true) {
+        // Tie
+        case (playerSelection === computerSelection):
+            console.log("Tie!");
+            return 0;
+        // Player wins
+        case (playerSelection === "ROCK" && computerSelection === "SCISSORS"):
+        case (playerSelection === "PAPER" && computerSelection === "ROCK"):
+        case (playerSelection === "SCISSORS" && computerSelection === "PAPER"):
+            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+            return 1;
+        // Player loses
+        case (computerSelection === "ROCK" && playerSelection === "SCISSORS"):
+        case (computerSelection === "PAPER" && playerSelection === "ROCK"):
+        case (computerSelection === "SCISSORS" && playerSelection === "PAPER"):
+            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+            return 2;
     }
 }
 
-const playerSelection = "rock";
-const computerSelection = computerPlay();
 
-console.log("Computer chooses: ", computerPlay());
+function game() {
+    // Initialize selections
+    let playerSelection;
+    let computerSelection;
 
-console.log(playRound(playerSelection, computerSelection));
+    // Initialize scores
+    let playerScore = 0;
+    let computerScore = 0;
+
+    // Initialize round result
+    let roundResult;
+
+    // Main game loop
+    for (let i = 0; i < 5; i++) {
+        // Prompt player for selection, re-prompting if invalid
+        while (true) {
+            playerSelection = prompt("Choose ROCK, PAPER, or SCISSORS");
+            playerSelection = playerSelection.toUpperCase();
+
+            if (playerSelection === "ROCK" || playerSelection === "PAPER" || playerSelection === "SCISSORS") {
+                break;
+            }
+        }
+
+        // Play a round and store the returned value
+        computerSelection = computerPlay();
+        roundResult = playRound(playerSelection, computerSelection);
+
+        // Update score based on roundResult value
+        if (roundResult === 1) {
+            playerScore++;
+        } else if (roundResult === 2) {
+            computerScore++;
+        }
+    }
+
+    // Log results based on score
+    if (playerScore > computerScore) {
+        console.log(`Congratulations, you win ${playerScore} to ${computerScore}!`);
+    } else if (computerScore > playerScore) {
+        console.log(`Sorry, you lose ${playerScore} to ${computerScore}!`);
+    } else {
+        console.log(`It's a tie! Both of you got ${computerScore}`);
+    }
+}
+
+game();
