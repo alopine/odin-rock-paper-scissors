@@ -1,0 +1,34 @@
+/* || General styles */
+html {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    flex-direction: column;
+}
+
+/* || Flexbox */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.margin {
+    margin: 1em;
+}
+
+
+header, main, footer {
+    flex-direction: column;
+}
+
+.scores {
+    justify-content: space-between;
+}
+
+.selection {
+    justify-content: space-between;
+}

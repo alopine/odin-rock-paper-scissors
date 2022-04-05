@@ -5,17 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="rockpaperscissors.js" defer></script>
 
     <title>Odin Rock Paper Scissors</title>
 </head>
-<body>
-    <h1>Rock, Paper, Scissors!</h1>
-    <div id="playerScore">Player: 0</div>
-    <div id="computerScore">Computer: 0</div>
-    <button class="btn">Rock</button>
-    <button class="btn">Paper</button>
-    <button class="btn">Scissors</button>
-    <div id="results"></div>
+<body class="container">
+    <header class="container">
+        <h1>Rock, Paper, Scissors!</h1>
+        <h2 id="round">Round 0</h2>
+    </header>
+    <main class="container">
+        <div class="scores container">
+            <div id="playerScore" class="margin">Player: 0</div>
+            <div id="computerScore" class="margin">Computer: 0</div>
+        </div>
+        <div class="selection margin">
+            <button class="btn">ROCK</button>
+            <button class="btn">PAPER</button>
+            <button class="btn">SCISSORS</button>
+        </div>
+    </main>
+    <footer class="container">
+        <button id="restart">Restart</button>
+        <div id="results" class="margin"></div>
+    </footer>
 </body>
 </html>
